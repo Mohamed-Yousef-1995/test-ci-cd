@@ -1,0 +1,22 @@
+name: Run JavaScript File
+
+on:
+  push:
+    branches:
+      - main # or your default branch
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14 # or any other version you need
+
+      - name: Run JavaScript file
+        run: node main.js
