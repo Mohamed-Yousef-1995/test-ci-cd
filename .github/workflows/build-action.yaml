@@ -1,20 +1,23 @@
-name: Run Docker Compose
+name: Build and Run Node App in Docker
 
 on:
   push:
     branches:
       - main
+  pull_request:
 
 jobs:
-  docker-compose-up:
+  build-and-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-      - name: Run Docker Compose
-        run: docker compose up -d
+    - name: Build and run using Docker Compose
+      run: |
+        docker-compose up -d --build
+        docker ps
